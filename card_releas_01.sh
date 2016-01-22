@@ -338,20 +338,12 @@ echo -en "\e[?9l"
 stty icanon
 tput clear
 declare -l TRANC
-if [[ $flag == 1 ]]; then
-	echo "Вы выиграли"
-else
-	echo "Вы проиграли"
-fi
-sleep 1
 read -n 1 -p "Еще партию? [yn]" TRANC
 if [[ $TRANC = "y" ]]; then
 	continue
 else
 	break
-	echo "До встречи"
 fi
-sleep 2
 done
 tput clear
 echo -e $prot 
