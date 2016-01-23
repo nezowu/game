@@ -16,14 +16,14 @@ switch(){
 		flag=0
 fi
 }
-reader(){
+writer(){
 	echo ${onestaf[@]} >&${COPROC[1]}
 	echo ${twostaf[@]} >&${COPROC[1]}
 	echo ${battlestaf[@]} >&${COPROC[1]}
 	echo ${trashstaf[@]} >&${COPROC[1]}
 	echo ${shuf_card[@]} >&${COPROC[1]}
 }
-reader1(){
+reader(){
 	read -u ${COPROC[0]} -a twostaf
 	read -u ${COPROC[0]} -a onestaf
 	read -u ${COPROC[0]} -a battlestaf
@@ -182,9 +182,9 @@ while true; do  #главный цикл "движок"
 			:
 		elif [[ $FLAG == 3 ]]; then
 			if [[  ${#battlestaf[@]} == 10 ]]; then
-				reader1
+				reader
 			else
-				reader1
+				reader
 				switch
 			fi
 		fi
@@ -220,7 +220,7 @@ while true; do  #главный цикл "движок"
 			((lim++))
 		done
 		echo "3" >&${COPROC[1]}
-		reader
+		writer
 		FLAG=0
 		switch
 	elif [[ $flag == 0 && ${#battlestaf[@]} != 10 ]] && [[ $FLAG == 2 ]]; then #забрал
@@ -243,7 +243,7 @@ while true; do  #главный цикл "движок"
 			((lim++))
 		done
 		echo "3" >&${COPROC[1]}
-		reader
+		writer
 		FLAG=0
 		switch
 	elif [[ $flag == 0 && ${#battlestaf[@]} == 10 ]] && [[ $FLAG == 0 ]]; then
@@ -275,7 +275,7 @@ while true; do  #главный цикл "движок"
 			((lim++))
 		done
 		echo "3" >&${COPROC[1]}
-		reader
+		writer
 	else
 		echo -en "\e[?9h"
 		read -rsn 6 x
