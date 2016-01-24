@@ -338,6 +338,7 @@ while true; do
 	declare -l TRANC
 	read -n 1 -p "Еще партию? [yn]" TRANC
 	if [[ $TRANC = "y" ]]; then
+		switch
 		continue
 	else
 		break
